@@ -12,8 +12,10 @@ python setup.py remove
 ```
 
 # Usage
-Server: once it was installed, there is a service running on windows, or you can run the service by: python MessageNotifier.py
-
+Server: once it was installed, there is a service running on windows, or you can run the service by: 
+```python
+python MessageNotifier.py
+```
 Client: 
 ```python
 import MessageNotifier
