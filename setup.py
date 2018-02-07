@@ -15,8 +15,10 @@ if sys_type == "Windows":
         hKey = win32api.RegOpenKeyEx(win32con.HKEY_CURRENT_USER, runpath, 0, win32con.KEY_SET_VALUE)
         path = os.path.abspath(pyfile)
         if os.path.isfile(path):
-            win32api.RegSetValueEx(hKey, 'MessageNotifierService', 0, win32con.REG_SZ,
-                                   '{}\\pythonw.exe {}'.format(sys.prefix, path))
+            cmd = '{}\\pythonw.exe {}'.format(sys.prefix, path)
+            win32api.RegSetValueEx(hKey, 'MessageNotifierService', 0, win32con.REG_SZ, cmd)
+            import subprocess
+            subprocess.Popen('{}\\pythonw.exe MessageNotifier.py'.format(sys.prefix))   # run service
         win32api.RegCloseKey(hKey)
 
     def remove_python_to_autorun():
@@ -39,7 +41,7 @@ if sys_type == "Windows":
 
 # setup
 setup(name='MessageNotifier',
-version='1.0',
-py_modules=['MessageNotifier'],
-)
+      version='1.0',
+      py_modules=['MessageNotifier'],
+      )
 
